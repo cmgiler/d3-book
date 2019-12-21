@@ -72,12 +72,20 @@
 					return xScale(i);
 				})
 				.attr("y", function(d) {
+					return yScale.range()[0];
+				})
+				.attr("height", function(d) {
+					return 0;
+				})
+				.attr("width", xScale.bandwidth())
+				.transition()
+				.duration(2000)
+				.attr("y", function(d) {
 					return yScale(d[0]);
 				})
 				.attr("height", function(d) {
 					return yScale(d[1]) - yScale(d[0]);
-				})
-				.attr("width", xScale.bandwidth());
+				});
 						
 		</script>
 	</body>

@@ -73,12 +73,20 @@
 					return xScale(i);
 				})
 				.attr("y", function(d) {
+					return yScale.range()[0];  // <-- Changed y value
+				})
+				.attr("height", function(d) {
+					return 0;  // <-- Changed height value
+				})
+				.attr("width", xScale.bandwidth())
+				.transition()
+				.duration(1000)
+				.attr("y", function(d) {
 					return yScale(d[1]);  // <-- Changed y value
 				})
 				.attr("height", function(d) {
 					return yScale(d[0]) - yScale(d[1]);  // <-- Changed height value
-				})
-				.attr("width", xScale.bandwidth());
+				});
 						
 		</script>
 	</body>

@@ -85,8 +85,16 @@
 
 			//On button click, execute a function for each circle in the allCircles selection
 			d3.selectAll("input")
-				.on("click", function() {
-					allCircles.each(freakOut);  //Hold on to your hats!
+				.on("click", function(d, i) {
+					d3.selectAll('.scared')
+								.each(relax)
+
+					allCircles.filter(function() {
+						return Math.floor(Math.random() * 50) == 3;
+					})
+					.each(freakOut)
+
+					// allCircles.each(freakOut);  //Hold on to your hats!
 				});
 
 			//Define the freakOut function
@@ -101,14 +109,26 @@
 				var colorIndex = Math.round(Math.random() * 20);
 
 				d3.select(this)
+					.classed("scared", true)
 					.transition()
-					.delay(i * 25)
+					.delay(i * 100)
 					.duration(2000)
 					.ease(d3.easeElasticOut)
-					.attr("fill", colors[colorIndex])
-					.attr("r", 25);
+					.attr("fill", "red")
+					.attr("r", 10);
 
 			};
+
+			var relax = function(d, i) {
+				d3.select(this)
+					.classed("scared", false)
+					.transition()
+					.delay(i*25)
+					.duration(1000)
+					// .ease(d3.easeElasticOut)
+					.attr("fill", "black")
+					.attr("r", 2.5);
+			}
 
 		</script>
 	</body>
